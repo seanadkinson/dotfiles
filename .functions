@@ -30,7 +30,6 @@ cdf() {  # short for cdfinder
 }
 
 
-
 # git commit browser. needs fzf
 log() {
   git log --graph --color=always \
@@ -39,6 +38,13 @@ log() {
       --bind "ctrl-m:execute:
                 echo '{}' | grep -o '[a-f0-9]\{7\}' | head -1 |
                 xargs -I % sh -c 'git show --color=always % | less -R'"
+}
+
+# lets toss an image onto my server and pbcopy that bitch.
+function scpp() {
+  scp "$1" sa:~/www/i;
+  echo "http://seanadkinson.com/i/$1" | pbcopy;
+  echo "Copied to clipboard: http://seanadkinson.com/i/$1"
 }
 
 
