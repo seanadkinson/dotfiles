@@ -1,3 +1,6 @@
+[user]
+    name = Sean Adkinson
+    email = sean.adkinson@streem.pro
 [alias]
 	c = commit -am
 	fpush = push --force
@@ -53,7 +56,7 @@
 	#   https://brettterpstra.com/2021/11/25/git-better-with-fzf-and-fish/ and https://gist.github.com/aluxian/9c6f97557b7971c32fdff2f2b1da8209                   
 
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/seanadkinson/.gitignore
 	attributesfile = ~/.gitattributes
 	precomposeUnicode = true
 	# https://github.com/dandavison/delta
@@ -127,7 +130,8 @@
 
 # git mergetool
 [merge]
-	tool = opendiff
+	log = true
+	tool = diffmerge
 	renameLimit = 0
 
 
@@ -136,6 +140,8 @@
 
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
+[branch]
+        autosetupmerge = always
 
 # correct typos
 [help]
@@ -156,8 +162,8 @@
 [include]
 	path = ~/.gitconfig.local
 
-#[init]
-#	templatedir = ~/.git_template
+[init]
+	templatedir = ~/.git_template
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -177,3 +183,26 @@
 	version = 2
 
 
+# Any GitHub repo with my username should be checked out r/w by default
+# http://rentzsch.tumblr.com/post/564806957/public-but-hackable-git-submodules
+[url "git@github.com:seanadkinson/"]
+  insteadOf = "git://github.com/seanadkinson/"
+[mergetool "diffmerge"]
+    cmd = ~/bin/diffmerge.sh --merge --result=$MERGED $LOCAL $BASE $REMOTE
+    trustExitCode = true
+[mergetool]
+    keepBackup = false
+[diff]
+    tool = diffmerge
+[difftool "diffmerge"]
+    cmd = ~/bin/diffmerge.sh $LOCAL $REMOTE
+[git-up "rebase"]
+  auto = false
+[remote]
+  pushDefault = origin
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

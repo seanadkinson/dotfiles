@@ -36,7 +36,7 @@ whichlink() {
 }
 
 
-# git commit browser. needs fzf. ctrl-m to view commit.
+# git commit browser. needs fzf
 log() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
@@ -49,6 +49,13 @@ log() {
 #make two beeps
 beep() { 
   echo -e '\a'; sleep 0.1; echo -e '\a';
+}
+
+# lets toss an image onto my server and pbcopy that bitch.
+function scpp() {
+  scp "$1" sa:~/www/i;
+  echo "http://seanadkinson.com/i/$1" | pbcopy;
+  echo "Copied to clipboard: http://seanadkinson.com/i/$1"
 }
 
 
