@@ -60,4 +60,8 @@
 [init]
     templatedir = ~/.git_template
 [push]
-    default = current
+  default = current
+[git-up "rebase"]
+  auto = false
+[remote]
+  pushDefault = origin
