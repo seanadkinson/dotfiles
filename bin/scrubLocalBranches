@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+
+# From: http://stevenharman.net/git-clean-delete-already-merged-branches
+
+echo "Before cleanup:";
+git branch;
+echo "----";
+git branch --no-color --merged | grep -v "\*" | grep -v -E "master$" | xargs -n 1 git branch -d;
+echo "----";
+echo "After cleanup:";
+git branch;
+
