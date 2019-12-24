@@ -92,3 +92,5 @@ alias xpraserver='xpra start --printing=no --systemd-run=no --daemon=no :110'
 # weird ass behavior without this.
 alias watchexec="watchexec --project-origin ."
 
+alias dc="docker-compose"
+
