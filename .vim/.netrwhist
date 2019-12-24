@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/seanadkinson/code/streem-app/streem-sdk/services/streem-service'
+let g:netrw_dirhist_2='/Users/seanadkinson/code/streem-app/streem-sdk/services'
+let g:netrw_dirhist_3='/Users/seanadkinson/code/streem-sdk-android/.git'
+let g:netrw_dirhist_4='/Users/seanadkinson/code/streem-app/streem-sdk/android/gradle'
+let g:netrw_dirhist_5='/Users/seanadkinson/tmp/streem-admin'
+let g:netrw_dirhist_6='/Users/seanadkinson/code/dotfiles/bin'
+let g:netrw_dirhist_7='/Users/seanadkinson/code/streem-app/streem-sdk/services/build'
+let g:netrw_dirhist_8='/Users/seanadkinson/code/pb-and-k/gradle'

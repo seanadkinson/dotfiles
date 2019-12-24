@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+set -x
+
+dir="$1"
+ext="$2"
+
+#if [ -z "$dir" -o -z "$ext" ]; then
+#  echo "Usage: git-line-counts <subdir> <extension_regex>"
+#  exit 1
+#fi
+
+git ls-files | grep -E ".*($dir).*" | grep -v "generated" | awk -F . '{print $NF}' | sort | uniq -c | sort -n -r | awk '{print $2,$1}'
+
+git ls-files | grep -E ".*($dir).*($ext)$" | grep -v "generated" | xargs wc -l | tail -1
+

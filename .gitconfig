@@ -103,8 +103,8 @@
     # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
     # https://blog.github.com/2018-04-05-git-217-released/
     colorMoved = zebra
-[remote "origin"]
-	fetch = +refs/heads/*:refs/remotes/origin/*
+#[remote "origin"]
+#	fetch = +refs/heads/*:refs/remotes/origin/*
 [stash]
 	showPatch = true
 [log]
@@ -131,5 +131,8 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[filter "gitignore"]
+	clean = sed '/\\/\\/gitignore$/'d
+	smudge = cat

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+PROJ="$1"
+SLY="/Users/seanadkinson/code/streem-app/scripts/sly"
+DC="docker-compose"
+
+if [ -z "$PROJ" ]; then
+  echo "Usage: redc <project...>"
+  exit 1
+fi
+
+$SLY docker build -p $PROJ $2 $3 $4 $5 $6 $7 $8 $9
+$DC stop $PROJ $2 $3 $4 $5 $6 $7 $8 $9
+$DC up -d $PROJ $2 $3 $4 $5 $6 $7 $8 $9
+$DC logs -f $PROJ $2 $3 $4 $5 $6 $7 $8 $9
