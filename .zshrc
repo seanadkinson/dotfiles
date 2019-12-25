@@ -1,5 +1,8 @@
 # uncomment to profile prompt startup with zprof
 # zmodload zsh/zprof
+autoload bashcompinit
+bashcompinit
+
 
 # history
 SAVEHIST=100000
