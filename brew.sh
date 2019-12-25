@@ -34,7 +34,7 @@ brew install grep
 brew install z
 
 # run this script when this file changes guy.
-brew install entr
+# brew install entr
 
 # github util
 brew install gh
@@ -64,7 +64,10 @@ brew install ffmpeg
 # json stuff
 brew install jq gron
 
-brew install ncdu # find where your diskspace went
+brew install android-platform-tools
+brew install pidcat   # colored logcat guy
+
+# brew install ncdu # find where your diskspace went
 
 
 brew install scrcpy # control/view android phone from PC. amazing

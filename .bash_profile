@@ -99,6 +99,8 @@ if [[ -n "$ZSH_VERSION" ]]; then  # quit now if in zsh
 fi;
 
 # Sorry, very MacOS centric here. :/
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 if  which brew > /dev/null; then
 
     # bash completion.
