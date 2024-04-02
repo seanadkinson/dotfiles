@@ -30,7 +30,7 @@ if ! set -q lucid_clean_indicator
 end
 
 if ! set -q lucid_cwd_color
-    set -g lucid_cwd_color blue
+    set -g lucid_cwd_color brblue
 end
 
 if ! set -q lucid_git_color
