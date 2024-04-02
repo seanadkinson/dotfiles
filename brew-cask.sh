@@ -2,62 +2,28 @@
 
 
 # to maintain cask ....
-#     brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup`
+#     brew update && brew cleanup
 
 
 # Install native apps
 
-# brew install caskroom/cask/brew-cask
-# brew tap caskroom/versions
-
 # daily
-# brew cask install spectacle
-brew cask install dropbox
-# brew cask install gyazo
-# brew cask install 1password
-# brew cask install rescuetime
-# brew cask install flux
-brew cask install alfred
-brew cask install slack
+brew install --cask rectangle
+brew install --cask 1password
+brew install --cask rescuetime
 
 # dev
-brew cask install iterm2
-brew cask install sublime-text
-brew cask install imagealpha
-brew cask install imageoptim
-brew cask install atom
-brew cask install diffmerge
-brew cask install docker
-brew cask install ngrok
-brew cask install postman
+brew install --cask iterm2
+brew install --cask sublime-text
+brew install --cask imageoptim
 
-# fun
-# brew cask install limechat
-# brew cask install miro-video-converter
-# brew cask install horndis               # usb tethering
-
-# browsers
-brew cask install google-chrome-canary
-# brew cask install firefoxnightly
-# brew cask install webkit-nightly
-# brew cask install chromium
-# brew cask install torbrowser
 
 # less often
-# brew cask install disk-inventory-x
-# brew cask install screenflow
-# brew cask install vlc
-# brew cask install gpgtools
-# brew cask install licecap
-# brew cask install utorrent
+brew install --cask disk-inventory-x
+brew install --cask screenflow
+brew install --cask vlc
 
-brew cask install spotify
+brew install --cask spotify
 
-brew tap caskroom/fonts 
-brew cask install font-fira-code
-
-
-# Not on cask but I want regardless.
-
-# File Multi Tool 5
-# Phosphor
+brew tap homebrew/cask-fonts
+brew install --cask font-fira-code

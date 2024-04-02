@@ -1,11 +1,6 @@
 #!/bin/bash
 
 
-# finding files with locate and updatedb
-LC_ALL=C sudo /Users/paulirish/.homebrew/bin/gupdatedb --prunepaths="/tmp /var/tmp /.Spotlight-V100 /.fseventsd /Volumes/MobileBackups /Volumes/Volume /.MobileBackups"
-
-which glocate > /dev/null && alias locate=glocate
-locate navbar
 
 
 
@@ -59,7 +54,11 @@ rm $chromefilename
 
 
 
+# measuring time in fish shell:
 
+set -l then (gdate +%s%N); 
+sleep 0.5; 
+set -l andnow (gdate +%s%N);  echo cool (math ( math $andnow - $then) / 1000 / 1000  )
 
 
 

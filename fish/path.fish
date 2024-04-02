@@ -1,4 +1,8 @@
 
+# 2022-11 comment: this whole file feels gross. 
+# also feels like https://fishshell.com/docs/current/cmds/fish_add_path.html would clean it up a lot
+# also a .paths file seems like a great idea. https://github.com/davidaurelio/dotfiles/blob/ce3d4117762f15ed92287e1049efefadfefb557a/.profile#L16-L22
+
 # Grab my $PATHs from ~/.extra
 set -l PATH_DIRS (cat "$HOME/.extra" | grep "^PATH" | \
     # clean up bash PATH setting pattern
@@ -7,44 +11,45 @@ set -l PATH_DIRS (cat "$HOME/.extra" | grep "^PATH" | \
     sed "s/~\//{\$HOME}\//")
 
 
-set -l PA ""
+set -l PA $PATH
+
+
 
 for entry in (string split \n $PATH_DIRS)
     # resolve the {$HOME} substitutions
     set -l resolved_path (eval echo $entry)
-    if test -d "$resolved_path"; # and not contains $resolved_path $PATH
+    if contains $resolved_path $PATH;
+        continue; # skip dupes
+    end
+    if test -d "$resolved_path";
         set PA $PA "$resolved_path"
     end
 end
 
-# # rvm
-# if which -s rvm;
-# 	set PA $PA /Users/paulirish/.rvm/gems/ruby-2.2.1/bin
-# end
 
-
-set -l paths "
+set -l manually_added_paths "
 # yarn binary
 $HOME/.yarn/bin
 $GOPATH/bin
 
 # yarn global modules (hack for me)
 $HOME/.config/yarn/global/node_modules/.bin
+
+# `code` binary from VS Code
+/Applications/Visual Studio Code.app/Contents/Resources/app/bin
 "
 
-for entry in (string split \n $paths)
+for entry in (string split \n $manually_added_paths)
     # resolve the {$HOME} substitutions
     set -l resolved_path (eval echo $entry)
+    if contains $resolved_path $PATH;
+      
+        continue; # skip dupes
+    end
     if test -d "$resolved_path";
         set PA $PA "$resolved_path"
     end
 end
-
-# GO
-set PA $PA "/Users/paulirish/.go/bin"
-
-# `code` binary from VS Code insiders
-set PA $PA "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
 
 
 # Google Cloud SDK.

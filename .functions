@@ -29,6 +29,11 @@ cdf() {  # short for cdfinder
   cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
 }
 
+# Use `which` along with symlink resolving
+whichlink() {
+	# This dopeass conditional stolen from sheerun's dotfiles
+	$(type -p greadlink readlink | head -1) -f $(which $@)
+}
 
 # git commit browser. needs fzf
 log() {
@@ -40,6 +45,11 @@ log() {
                 xargs -I % sh -c 'git show --color=always % | less -R'"
 }
 
+#make two beeps
+beep() { 
+  echo -e '\a'; sleep 0.1; echo -e '\a';
+}
+
 # lets toss an image onto my server and pbcopy that bitch.
 function scpp() {
   scp "$1" sa:~/www/i;
@@ -48,10 +58,9 @@ function scpp() {
 }
 
 
-
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
-	local port="${1:-8000}"
+	local port="${1:-8011}"
 	open "http://localhost:${port}/" &
  	# statikk is good because it won't expose hidden folders/files by default.
  	# yarn global add statikk
@@ -88,16 +97,6 @@ function whois() {
 	/usr/bin/whois -h whois.internic.net $domain | sed '/NOTICE:/q'
 }
 
-function localip(){
-	function _localip(){ echo "📶  "$(ipconfig getifaddr "$1"); }
-	export -f _localip
-	local purple="\x1B\[35m" reset="\x1B\[m"
-	networksetup -listallhardwareports | \
-		sed -r "s/Hardware Port: (.*)/${purple}\1${reset}/g" | \
-		sed -r "s/Device: (en.*)$/_localip \1/e" | \
-		sed -r "s/Ethernet Address:/📘 /g" | \
-		sed -r "s/(VLAN Configurations)|==*//g"
-}
 
 # preview csv files. source: http://stackoverflow.com/questions/1875305/command-line-csv-viewer
 function csvpreview(){
@@ -156,7 +155,7 @@ gifify() {
 	if [[ $2 == '--good' ]]; then
 	  ffmpeg -i "$1" -r 10 -vcodec png out-static-%05d.png
 	  time convert -verbose +dither -layers Optimize -resize 900x900\> out-static*.png  GIF:- | gifsicle --colors 128 --delay=5 --loop --optimize=3 --multifile - > "$1.gif"
-	  rm out-static*.png
+	  rm -f out-static*.png
 	else
 	  ffmpeg -i "$1" -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$1.gif"
 	fi
@@ -176,12 +175,48 @@ function nullify() {
   "$@" >/dev/null 2>&1
 }
 
-
-# visual studio code. a la `subl`
-function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCodeInsiders" --args $*; }
-
 # `shellswitch [bash |zsh]`
 #   Must be in /etc/shells
 shellswitch () {
 	chsh -s $(brew --prefix)/bin/$1
+}
+
+# from https://github.com/davidaurelio/dotfiles/blob/ce3d4117762f15ed92287e1049efefadfefb557a/.bash_functions
+todatauri () {
+  local M=`file "$1" --mime-type | sed 's/^.*: //'`;
+  local D=`openssl base64 -in "$1"|tr -d '\n'`;
+  echo "data:$M;base64,$D";
+}
+
+
+##
+# lazy initialize nvm, rvm, miniconda
+# https://news.ycombinator.com/item?id=33582219
+##
+
+# npm alternatives:
+# * i kinda like volta more but i forget it.
+# * https://github.com/Schniz/fnm also exists.
+# * https://asdf-vm.com/ has lots of fans. i want to try it.
+function nvm {
+	unset -f nvm
+	export NVM_DIR="$HOME/.nvm"
+	. "$NVM_DIR/nvm.sh" --no-use
+	nvm "${@}"
+}
+
+# lazy initialize rvm
+# 2022-11 apparently a while ago i noted that i prefer rbenv? 
+# and apparently theres another competitor that looks better than all those
+function rvm {
+	unset -f rvm
+	source "$HOME/.rvm/scripts/rvm"
+	rvm "${@}"
+}
+
+# lazy initialize conda
+function conda {
+	unset -f conda
+	source <(/opt/miniconda3/bin/conda shell.bash hook)
+	conda "${@}"
 }
