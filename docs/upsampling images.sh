@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # basic
 convert image-filename.png -resize 300% image-filename.3x-basic.png
 
