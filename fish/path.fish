@@ -58,5 +58,6 @@ if test -f "$HOME/google-cloud-sdk/path.fish.inc"
 end
 
 fish_add_path ~/bin
+fish_add_path ~/.rvm/bin
 
 set --export PATH $PA
