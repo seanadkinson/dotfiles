@@ -164,6 +164,7 @@
 
 [init]
 	templatedir = ~/.git_template
+	defaultBranch = main
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -209,3 +210,7 @@
 [filter "gitignore"]
 	clean = sed '/\\/\\/gitignore$/'d
 	smudge = cat
+[submodule]
+	recurse = true
+[alias]
+  up = !zsh ~/bin/git-up.sh

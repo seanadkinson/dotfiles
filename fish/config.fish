@@ -102,6 +102,8 @@ if bind -M insert > /dev/null 2>&1
     bind -M insert \cb git-recent-with-fzf-and-diff
 end
 
+bind -k up history-prefix-search-backward
+
 # TODO debug this
 # this currently messes with newlines in my prompt. lets debug it later.
 # test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish

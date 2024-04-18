@@ -30,7 +30,7 @@ if ! set -q lucid_clean_indicator
 end
 
 if ! set -q lucid_cwd_color
-    set -g lucid_cwd_color brblue
+    set -g lucid_cwd_color brmagenta
 end
 
 if ! set -q lucid_git_color
@@ -362,8 +362,16 @@ function __lucid_git_status
     end
 
     # Render git status. When in-progress, use previous state to reduce flicker.
-    set_color $lucid_git_color
-    echo -n $__lucid_git_static ''
+    if string match -q -- "*release*" $__lucid_git_static 
+        set_color -u brred
+        echo -n $__lucid_git_static
+        set_color normal
+        set_color $lucid_git_color
+        echo -n ' '
+    else
+        set_color $lucid_git_color
+        echo -n $__lucid_git_static ''
+    end
 
     if ! test -z $__lucid_dirty
         echo -n $__lucid_dirty
