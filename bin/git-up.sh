@@ -38,13 +38,13 @@ git fetch --all -p >/dev/null
 # Delete pruned local branches.
 for branch in $(get_deleted_branches); do
   if [ "$branch" = "$START_BRANCH" ]; then
-    printf "\n\nDeleting current branch \"%s\". Stashing changes and switching to master.\n" "$branch"
+    printf "\n\nDeleting current branch \"%s\". Stashing changes and switching to main.\n" "$branch"
 
     # Go to the root dir in case branch switch removes current working dir.
     cd "$(git rev-parse --show-toplevel)" || exit 1
     git stash >/dev/null
-    git checkout master >/dev/null
-    START_BRANCH=master
+    git checkout main >/dev/null
+    START_BRANCH=main
 
     git branch -D "$branch" >/dev/null
   else

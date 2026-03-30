@@ -1,6 +1,6 @@
 [user]
     name = Sean Adkinson
-    email = sean.adkinson@streem.pro
+	email = sean@rockhome.app
 [alias]
 	c = commit -am
 	fpush = push --force

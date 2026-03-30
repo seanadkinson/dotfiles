@@ -148,7 +148,10 @@ print_success() {
 
 # finds all .dotfiles in this folder
 declare -a FILES_TO_SYMLINK=$(find . -type f -maxdepth 1 -name ".*" -not -name .DS_Store -not -name .git -not -name .macos | sed -e 's|//|/|' | sed -e 's|./.|.|' | sort)
-FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin .config/fish .git_template" # add in vim and the binaries
+FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin .git_template" # add in vim and the binaries
+
+# These go into ~/.config/ (handled separately in main)
+declare -a CONFIG_SYMLINKS=("fish" "starship.toml")
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -182,6 +185,29 @@ main() {
             execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"
         fi
 
+    done
+
+    # Symlink items into ~/.config/
+    mkd "$HOME/.config"
+    for i in "${CONFIG_SYMLINKS[@]}"; do
+        sourceFile="$(pwd)/$i"
+        targetFile="$HOME/.config/$i"
+
+        if [ -e "$targetFile" ]; then
+            if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
+                ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
+                if answer_is_yes; then
+                    rm -rf "$targetFile"
+                    execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"
+                else
+                    print_error "$targetFile → $sourceFile"
+                fi
+            else
+                print_success "$targetFile → $sourceFile"
+            fi
+        else
+            execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"
+        fi
     done
 
 }
