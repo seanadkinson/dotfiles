@@ -6,10 +6,6 @@ jobs:
   shellcheck:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v4
     - name: Run ShellCheck
-      uses: ludeeus/action-shellcheck@2.0.0
-      with:
-        scandir: './bin'
-        severity: error
-        format: tty
+      run: find ./bin -type f -name '*.sh' ! -name 'git-up.sh' -exec shellcheck --severity=error {} +
