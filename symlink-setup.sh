@@ -151,7 +151,7 @@ declare -a FILES_TO_SYMLINK=$(find . -type f -maxdepth 1 -name ".*" -not -name .
 FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin .git_template" # add in vim and the binaries
 
 # These go into ~/.config/ (handled separately in main)
-declare -a CONFIG_SYMLINKS=("fish" "starship.toml")
+declare -a CONFIG_SYMLINKS=("fish" "starship.toml" "ghostty")
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

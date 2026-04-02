@@ -113,10 +113,6 @@ if  which brew > /dev/null; then
     # homebrew completion
     source "$(brew --prefix)/etc/bash_completion.d/brew"
 
-    # hub completion
-    if  which hub > /dev/null; then
-        source "$(brew --prefix)/etc/bash_completion.d/hub.bash_completion.sh";
-    fi;
 fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`

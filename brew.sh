@@ -19,8 +19,6 @@ brew install findutils
 # Note: don’t forget to add `/usr/local/bin/<EACHSHELL>` to `/etc/shells` before running `chsh`.
 brew install fish
 
-brew install bash-completion
-
 
 # Install wget
 brew install wget
@@ -52,7 +50,7 @@ brew install mtr
    # `abbr mtr "sudo mtr"` to avoid forgetting.
 
 # Install other useful binaries
-brew install the_silver_searcher # ack is an alternative, tbh i forget which i like more.
+brew install ripgrep
 brew install fzf
 
 brew install imagemagick
@@ -65,11 +63,30 @@ brew install ffmpeg
 brew install jq gron
 
 brew install android-platform-tools
-brew install pidcat   # colored logcat guy
 
 # brew install ncdu # find where your diskspace went
 
-
 brew install scrcpy # control/view android phone from PC. amazing
-brew install youtube-dl
+brew install yt-dlp
+
+
+# Install native apps (casks)
+
+# daily
+brew install rectangle
+brew install 1password
+
+# dev
+brew install ghostty
+brew install imageoptim
+
+# less often
+brew install vlc
+
+brew install spotify
+
+# fonts
+brew install font-fira-code-nerd-font
+brew install font-jetbrains-mono-nerd-font
+brew install font-commit-mono-nerd-font
 

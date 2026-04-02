@@ -1,0 +1,11 @@
+command = /opt/homebrew/bin/fish
+theme = GitHub Dark
+background-opacity = 0.95
+background-blur-radius = 10
+# font-family = JetBrainsMono Nerd Font
+font-family = CommitMono Nerd Font
+font-size = 14
+window-padding-x = 10
+window-padding-y = 10
+keybind = super+k=clear_screen
+
